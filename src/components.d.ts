@@ -7,56 +7,40 @@
 
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
-import {
-  MatchResults,
-} from '@stencil/router';
+
 
 export namespace Components {
-  interface AppHome {}
-  interface AppProfile {
-    'match': MatchResults;
+  interface Epi2meDownload {
+    'downloads': string;
+    'platform': string;
+    'product': string;
+    'root': string;
   }
-  interface AppRoot {}
 }
 
 declare global {
 
 
-  interface HTMLAppHomeElement extends Components.AppHome, HTMLStencilElement {}
-  var HTMLAppHomeElement: {
-    prototype: HTMLAppHomeElement;
-    new (): HTMLAppHomeElement;
-  };
-
-  interface HTMLAppProfileElement extends Components.AppProfile, HTMLStencilElement {}
-  var HTMLAppProfileElement: {
-    prototype: HTMLAppProfileElement;
-    new (): HTMLAppProfileElement;
-  };
-
-  interface HTMLAppRootElement extends Components.AppRoot, HTMLStencilElement {}
-  var HTMLAppRootElement: {
-    prototype: HTMLAppRootElement;
-    new (): HTMLAppRootElement;
+  interface HTMLEpi2meDownloadElement extends Components.Epi2meDownload, HTMLStencilElement {}
+  var HTMLEpi2meDownloadElement: {
+    prototype: HTMLEpi2meDownloadElement;
+    new (): HTMLEpi2meDownloadElement;
   };
   interface HTMLElementTagNameMap {
-    'app-home': HTMLAppHomeElement;
-    'app-profile': HTMLAppProfileElement;
-    'app-root': HTMLAppRootElement;
+    'epi2me-download': HTMLEpi2meDownloadElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface AppHome {}
-  interface AppProfile {
-    'match'?: MatchResults;
+  interface Epi2meDownload {
+    'downloads'?: string;
+    'platform'?: string;
+    'product'?: string;
+    'root'?: string;
   }
-  interface AppRoot {}
 
   interface IntrinsicElements {
-    'app-home': AppHome;
-    'app-profile': AppProfile;
-    'app-root': AppRoot;
+    'epi2me-download': Epi2meDownload;
   }
 }
 
@@ -66,9 +50,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
-      'app-home': LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
-      'app-profile': LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
-      'app-root': LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
+      'epi2me-download': LocalJSX.Epi2meDownload & JSXBase.HTMLAttributes<HTMLEpi2meDownloadElement>;
     }
   }
 }

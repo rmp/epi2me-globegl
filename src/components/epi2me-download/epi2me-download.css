@@ -1,0 +1,78 @@
+header {
+  background: #5851ff;
+  color: white;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+
+h1 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #fff;
+  padding: 0 12px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+section.preferred {
+  border: 1px solid lightgrey;
+  width: 400px;
+  text-align: center;
+}
+
+div.allDownloads {
+  display: flex;
+  flex-direction: row;
+}
+
+section.product {
+  flex-grow: 2;
+  float: left;
+}
+
+section.platform {
+  border: 1px solid lightgrey;
+  margin: 2px;
+  padding: 4px;
+  flex-grow: 1;
+}
+
+section.platform div {
+  display: flex;
+  flex-grow: 1;
+  min-width: 500px;
+}
+
+section.platform div:hover {
+background: #ddd;
+}
+
+section.platform div * {
+  padding: 0 2px;
+}
+
+section.platform div span.timestamp {
+  flex: 0 0 100px;
+}
+
+section.platform div a {
+  flex-grow: 2;
+}
+
+section.platform div span.size {
+  flex: 0 0 100px;
+}
+
+.size {
+  color: #999;
+}
+button {
+  background: cornflowerblue;
+  font-size:1.2em;
+}
