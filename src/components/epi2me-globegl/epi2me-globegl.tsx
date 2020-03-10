@@ -10,7 +10,7 @@ import { interpolateYlOrRd } from 'd3-scale-chromatic';
 })
 
 export class EPI2MEGlobeGL {
-  @Prop() dataURI = '/data.json';
+  @Prop() dataURI = 'data.json';
 
   controller: any;
   data: any;

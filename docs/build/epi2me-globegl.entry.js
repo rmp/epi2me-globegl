@@ -74368,6 +74368,7 @@ function degsToRads(deg) {
 function radsToDegs(rad) {
   return rad * 180 / Math.PI;
 }
+//# sourceMappingURL=h3-js.es.js.map
 
 /**
  * @author WestLangley / http://github.com/WestLangley
@@ -77453,6 +77454,8 @@ function fromKapsule (kapsule) {
 
 var threeGlobe = fromKapsule(Globe, Group, true);
 
+const require$$0 = getCjsExportFromNamespace(three_module);
+
 /**
  * @author Eberhard Graether / http://egraether.com/
  * @author Mark Lundin 	/ http://mark-lundin.com
@@ -77463,7 +77466,7 @@ var threeGlobe = fromKapsule(Globe, Group, true);
  ** @author Jon Lim / http://jonlim.ca
  */
 
-var THREE$a = window.THREE || three_module;
+var THREE$a = window.THREE || require$$0;
 
 var TrackballControls;
 var threeTrackballcontrols = TrackballControls = function ( object, domElement ) {
@@ -85016,7 +85019,7 @@ var plasma = ramp$1(colors("0d088710078813078916078a19068c1b068d1d068e20068f2206
 const EPI2MEGlobeGL = class {
     constructor(hostRef) {
         registerInstance(this, hostRef);
-        this.dataURI = '/data.json';
+        this.dataURI = 'data.json';
     }
     render() {
         return (h(Host, null, h("div", { ref: el => { this.el = el; } })));
