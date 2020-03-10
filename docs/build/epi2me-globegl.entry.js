@@ -74368,7 +74368,6 @@ function degsToRads(deg) {
 function radsToDegs(rad) {
   return rad * 180 / Math.PI;
 }
-//# sourceMappingURL=h3-js.es.js.map
 
 /**
  * @author WestLangley / http://github.com/WestLangley
@@ -77454,8 +77453,6 @@ function fromKapsule (kapsule) {
 
 var threeGlobe = fromKapsule(Globe, Group, true);
 
-const require$$0 = getCjsExportFromNamespace(three_module);
-
 /**
  * @author Eberhard Graether / http://egraether.com/
  * @author Mark Lundin 	/ http://mark-lundin.com
@@ -77466,7 +77463,7 @@ const require$$0 = getCjsExportFromNamespace(three_module);
  ** @author Jon Lim / http://jonlim.ca
  */
 
-var THREE$a = window.THREE || require$$0;
+var THREE$a = window.THREE || three_module;
 
 var TrackballControls;
 var threeTrackballcontrols = TrackballControls = function ( object, domElement ) {
