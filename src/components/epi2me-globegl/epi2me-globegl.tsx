@@ -15,7 +15,6 @@ export class EPI2MEGlobeGL {
 
   controller: any;
   data: any;
-  config: any;
   el: HTMLDivElement;
 
   render() {
@@ -59,9 +58,12 @@ export class EPI2MEGlobeGL {
       .enablePointerInteraction(false); // performance improvement
 
 
-      this.controller.hexBinPointsData(this.data);
+      this.controller
+        .hexBinPointsData(this.data)
+        .labelsData(this.data)
+        .labelLabel('loc');
 
-    // Add auto-rotation
+        // Add auto-rotation
     this.controller.controls().autoRotate = true;
     this.controller.controls().autoRotateSpeed = 0.1;
   }
