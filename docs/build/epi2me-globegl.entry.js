@@ -85022,7 +85022,7 @@ const EPI2MEGlobeGL = class {
         this.dataURI = 'data.json';
     }
     render() {
-        return (h(Host, null, h("div", { ref: el => { this.el = el; } })));
+        return (h(Host, null, h("div", null, h("div", { ref: el => { this.el = el; } }), h("div", { class: "infoPanel", ref: el => { this.infoPanel = el; } }))));
     }
     componentWillLoad() {
         const promises = [];
@@ -85047,21 +85047,37 @@ const EPI2MEGlobeGL = class {
             .bumpImageUrl('//cdn.jsdelivr.net/npm/three-globe/example/img/earth-topology.png')
             .backgroundImageUrl('//cdn.jsdelivr.net/npm/three-globe/example/img/night-sky.png')
             .hexBinPointWeight('cnt')
-            .hexAltitude(d => d.sumWeight / maxCount) // fixed estimation of max data
+            .hexAltitude(d => d.sumWeight / maxCount * 2) // fixed estimation of max data
             .hexBinResolution(4)
             .hexTopColor(d => weightColor(d.sumWeight))
             .hexSideColor(d => weightColor(d.sumWeight))
-            .hexBinMerge(true)
-            .enablePointerInteraction(false); // performance improvement
+            //.hexBinMerge(true)
+            .onHexHover(hex => {
+            clearTimeout(this.infoPanelTimer);
+            if (!hex) {
+                this.infoPanelTimer = setTimeout(() => {
+                    this.infoPanel.innerHTML = '';
+                    this.infoPanel.style.display = 'none';
+                }, 10000);
+                return;
+            }
+            this.infoPanel.style.display = 'block';
+            this.infoPanel.innerHTML = `<dl>${hex.points[0].seq.map(seq => `<dt>${seq.acc}</dt><dd>${seq.strain}</dd>`).join('')}</dl>`;
+        });
+        //     .enablePointerInteraction(false); // performance improvement
         this.controller
-            .hexBinPointsData(this.data)
-            .labelsData(this.data)
-            .labelLabel('loc');
+            .hexBinPointsData(this.data);
+        /*        .labelsData(this.data)
+                .labelLabel('loc')
+                .labelLat(d => d.lat)
+                .labelLng(d => d.lng)
+                .labelText(d => d.acc.join("\n"));
+        */
         // Add auto-rotation
         this.controller.controls().autoRotate = true;
-        this.controller.controls().autoRotateSpeed = 0.1;
+        this.controller.controls().autoRotateSpeed = 0.06;
     }
-    static get style() { return "div {\n  width: 600px;\n  height: 600px;\n}"; }
+    static get style() { return "div.infoPanel {\n  width: 300px;\n  height: 600px;\n  right: 0;\n  top: 0;\n  position: absolute;\n  background: rgba(255,255,255,0.8);\n  border: 2px solid #aaa;\n  color: #000;\n  display: none;\n}\n\ndiv.infoPanel dt {\n  font-weight: bolder;\n}"; }
 };
 
 export { EPI2MEGlobeGL as epi2me_globegl };
