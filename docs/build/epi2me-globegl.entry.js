@@ -85077,7 +85077,7 @@ const EPI2MEGlobeGL = class {
         this.controller.controls().autoRotate = true;
         this.controller.controls().autoRotateSpeed = 0.06;
     }
-    static get style() { return "div.infoPanel {\n  width: 300px;\n  height: 600px;\n  right: 0;\n  top: 0;\n  position: absolute;\n  background: rgba(255,255,255,0.8);\n  border: 2px solid #aaa;\n  color: #000;\n  display: none;\n}\n\ndiv.infoPanel dt {\n  font-weight: bolder;\n}"; }
+    static get style() { return "div.infoPanel {\n  width: 300px;\n/*  height: 600px; */\n  right: 0;\n  top: 0;\n  position: absolute;\n  background: rgba(255,255,255,0.8);\n  border: 2px solid #aaa;\n  color: #000;\n  display: none;\n}\n\ndiv.infoPanel dt {\n  font-weight: bolder;\n}"; }
 };
 
 export { EPI2MEGlobeGL as epi2me_globegl };
