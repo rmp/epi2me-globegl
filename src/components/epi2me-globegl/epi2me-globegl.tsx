@@ -61,16 +61,8 @@ export class EPI2MEGlobeGL {
 
       this.controller.hexBinPointsData(this.data);
 
-  // Add auto-rotation
-  this.controller.controls().autoRotate = true;
-  this.controller.controls().autoRotateSpeed = 0.1;
-
-
-    // Add data
-//    this.controller.addData( this.data );
-
-    // Initialize and render the globe
-//    this.controller.init();
-//    this.controller.setAutoRotation( true, 0.2 );
+    // Add auto-rotation
+    this.controller.controls().autoRotate = true;
+    this.controller.controls().autoRotateSpeed = 0.1;
   }
 }
