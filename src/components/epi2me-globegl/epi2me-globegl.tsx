@@ -1,5 +1,6 @@
 import { Component, Host, Prop, h } from '@stencil/core';
 import Globe from 'globe.gl';
+import { scaleSequential } from 'd3-scale';
 import { interpolateYlOrRd } from 'd3-scale-chromatic';
 //import { scaleSqrt } from 'd3-scale';
 //import { csvParse } from 'd3-dsv';
@@ -38,8 +39,9 @@ export class EPI2MEGlobeGL {
   }
 
   componentDidLoad() {
-    const weightColor = interpolateYlOrRd;
-
+    // const weightColor = interpolateYlOrRd;
+    const weightColor = scaleSequential(interpolateYlOrRd)
+      .domain([0, 8]); // max needs updating with data
     // Create Gio.controller
     this.controller = Globe()
 
