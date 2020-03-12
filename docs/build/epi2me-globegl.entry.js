@@ -85036,7 +85036,10 @@ const EPI2MEGlobeGL = class {
         return Promise.all(promises);
     }
     componentDidLoad() {
-        const weightColor = interpolateYlOrRd;
+        const maxCount = 8;
+        // const weightColor = interpolateYlOrRd;
+        const weightColor = sequential(interpolateYlOrRd)
+            .domain([0, maxCount]); // max needs updating with data
         // Create Gio.controller
         this.controller = globe();
         this.controller(this.el)
@@ -85044,7 +85047,7 @@ const EPI2MEGlobeGL = class {
             .bumpImageUrl('//cdn.jsdelivr.net/npm/three-globe/example/img/earth-topology.png')
             .backgroundImageUrl('//cdn.jsdelivr.net/npm/three-globe/example/img/night-sky.png')
             .hexBinPointWeight('cnt')
-            .hexAltitude(d => d.sumWeight / 10) // fixed estimation of max data
+            .hexAltitude(d => d.sumWeight / maxCount) // fixed estimation of max data
             .hexBinResolution(4)
             .hexTopColor(d => weightColor(d.sumWeight))
             .hexSideColor(d => weightColor(d.sumWeight))
@@ -85054,11 +85057,6 @@ const EPI2MEGlobeGL = class {
         // Add auto-rotation
         this.controller.controls().autoRotate = true;
         this.controller.controls().autoRotateSpeed = 0.1;
-        // Add data
-        //    this.controller.addData( this.data );
-        // Initialize and render the globe
-        //    this.controller.init();
-        //    this.controller.setAutoRotation( true, 0.2 );
     }
     static get style() { return "div {\n  width: 600px;\n  height: 600px;\n}"; }
 };
