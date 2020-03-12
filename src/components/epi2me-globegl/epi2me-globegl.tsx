@@ -38,7 +38,7 @@ export class EPI2MEGlobeGL {
   }
 
   componentDidLoad() {
-    const maxCount = 8;
+    const maxCount = 16;
     // const weightColor = interpolateYlOrRd;
     const weightColor = scaleSequential(interpolateYlOrRd)
       .domain([0, maxCount]); // max needs updating with data

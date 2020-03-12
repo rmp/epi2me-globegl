@@ -85036,7 +85036,7 @@ const EPI2MEGlobeGL = class {
         return Promise.all(promises);
     }
     componentDidLoad() {
-        const maxCount = 8;
+        const maxCount = 16;
         // const weightColor = interpolateYlOrRd;
         const weightColor = sequential(interpolateYlOrRd)
             .domain([0, maxCount]); // max needs updating with data
@@ -85053,7 +85053,10 @@ const EPI2MEGlobeGL = class {
             .hexSideColor(d => weightColor(d.sumWeight))
             .hexBinMerge(true)
             .enablePointerInteraction(false); // performance improvement
-        this.controller.hexBinPointsData(this.data);
+        this.controller
+            .hexBinPointsData(this.data)
+            .labelsData(this.data)
+            .labelLabel('loc');
         // Add auto-rotation
         this.controller.controls().autoRotate = true;
         this.controller.controls().autoRotateSpeed = 0.1;
