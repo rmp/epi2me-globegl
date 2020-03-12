@@ -39,9 +39,10 @@ export class EPI2MEGlobeGL {
   }
 
   componentDidLoad() {
+    const maxCount = 8;
     // const weightColor = interpolateYlOrRd;
     const weightColor = scaleSequential(interpolateYlOrRd)
-      .domain([0, 8]); // max needs updating with data
+      .domain([0, maxCount]); // max needs updating with data
     // Create Gio.controller
     this.controller = Globe()
 
@@ -50,7 +51,7 @@ export class EPI2MEGlobeGL {
       .bumpImageUrl('//cdn.jsdelivr.net/npm/three-globe/example/img/earth-topology.png')
       .backgroundImageUrl('//cdn.jsdelivr.net/npm/three-globe/example/img/night-sky.png')
       .hexBinPointWeight('cnt')
-      .hexAltitude(d => d.sumWeight / 10) // fixed estimation of max data
+      .hexAltitude(d => d.sumWeight / maxCount) // fixed estimation of max data
       .hexBinResolution(4)
       .hexTopColor(d => weightColor(d.sumWeight))
       .hexSideColor(d => weightColor(d.sumWeight))
