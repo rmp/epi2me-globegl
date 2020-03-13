@@ -40,7 +40,7 @@ export class EPI2MEGlobeGL {
   }
 
   componentDidLoad() {
-    const maxCount = 16;
+    const maxCount = 36;
     // const weightColor = interpolateYlOrRd;
     const weightColor = scaleSequential(interpolateYlOrRd)
       .domain([0, maxCount]); // max needs updating with data
@@ -56,19 +56,23 @@ export class EPI2MEGlobeGL {
       .hexBinResolution(4)
       .hexTopColor(d => weightColor(d.sumWeight))
       .hexSideColor(d => weightColor(d.sumWeight))
+      .hexLabel(d => `<dl>${d.points[0].seq.map(seq => `<dt>${seq.acc}</dt><dd>${seq.strain}</dd>`).join('')}</dl>`)
+
       //.hexBinMerge(true)
-      .onHexHover(hex => {
-        clearTimeout(this.infoPanelTimer);
-        if(!hex) {
+      .onHexClick(d => {
+//        clearTimeout(this.infoPanelTimer);
+
+/*        if(!hex) {
           this.infoPanelTimer = setTimeout(() => {
             this.infoPanel.innerHTML = '';
             this.infoPanel.style.display='none';
           }, 10000);
           return;
         }
-
+*/
+console.log("click", d);
         this.infoPanel.style.display='block';
-        this.infoPanel.innerHTML = `<dl>${hex.points[0].seq.map(seq => `<dt>${seq.acc}</dt><dd>${seq.strain}</dd>`).join('')}</dl>`;
+        this.infoPanel.innerHTML = `<h3>${d.points[0].loc}</h3><dl>${d.points[0].seq.map(seq => `<dt>${seq.acc}</dt><dd>${seq.strain}</dd>`).join('')}</dl>`;
        });
  //     .enablePointerInteraction(false); // performance improvement
 
@@ -82,6 +86,6 @@ export class EPI2MEGlobeGL {
 */
         // Add auto-rotation
     this.controller.controls().autoRotate = true;
-    this.controller.controls().autoRotateSpeed = 0.06;
+    this.controller.controls().autoRotateSpeed = 0.03;
   }
 }
