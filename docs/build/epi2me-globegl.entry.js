@@ -74368,6 +74368,7 @@ function degsToRads(deg) {
 function radsToDegs(rad) {
   return rad * 180 / Math.PI;
 }
+//# sourceMappingURL=h3-js.es.js.map
 
 /**
  * @author WestLangley / http://github.com/WestLangley
@@ -77453,6 +77454,8 @@ function fromKapsule (kapsule) {
 
 var threeGlobe = fromKapsule(Globe, Group, true);
 
+const require$$0 = getCjsExportFromNamespace(three_module);
+
 /**
  * @author Eberhard Graether / http://egraether.com/
  * @author Mark Lundin 	/ http://mark-lundin.com
@@ -77463,7 +77466,7 @@ var threeGlobe = fromKapsule(Globe, Group, true);
  ** @author Jon Lim / http://jonlim.ca
  */
 
-var THREE$a = window.THREE || three_module;
+var THREE$a = window.THREE || require$$0;
 
 var TrackballControls;
 var threeTrackballcontrols = TrackballControls = function ( object, domElement ) {
@@ -85033,7 +85036,7 @@ const EPI2MEGlobeGL = class {
         return Promise.all(promises);
     }
     componentDidLoad() {
-        const maxCount = 16;
+        const maxCount = 62;
         // const weightColor = interpolateYlOrRd;
         const weightColor = sequential(interpolateYlOrRd)
             .domain([0, maxCount]); // max needs updating with data
@@ -85048,18 +85051,21 @@ const EPI2MEGlobeGL = class {
             .hexBinResolution(4)
             .hexTopColor(d => weightColor(d.sumWeight))
             .hexSideColor(d => weightColor(d.sumWeight))
+            .hexLabel(d => `<dl>${d.points[0].seq.map(seq => `<dt>${seq.acc}</dt><dd>${seq.strain}</dd>`).join('')}</dl>`)
             //.hexBinMerge(true)
-            .onHexHover(hex => {
-            clearTimeout(this.infoPanelTimer);
-            if (!hex) {
-                this.infoPanelTimer = setTimeout(() => {
-                    this.infoPanel.innerHTML = '';
-                    this.infoPanel.style.display = 'none';
-                }, 10000);
-                return;
-            }
+            .onHexClick(d => {
+            //        clearTimeout(this.infoPanelTimer);
+            /*        if(!hex) {
+                      this.infoPanelTimer = setTimeout(() => {
+                        this.infoPanel.innerHTML = '';
+                        this.infoPanel.style.display='none';
+                      }, 10000);
+                      return;
+                    }
+            */
+            console.log("click", d);
             this.infoPanel.style.display = 'block';
-            this.infoPanel.innerHTML = `<dl>${hex.points[0].seq.map(seq => `<dt>${seq.acc}</dt><dd>${seq.strain}</dd>`).join('')}</dl>`;
+            this.infoPanel.innerHTML = `<h3>${d.points[0].loc}</h3><dl>${d.points[0].seq.map(seq => `<dt>${seq.acc}</dt><dd>${seq.strain}</dd>`).join('')}</dl>`;
         });
         //     .enablePointerInteraction(false); // performance improvement
         this.controller
@@ -85072,7 +85078,7 @@ const EPI2MEGlobeGL = class {
         */
         // Add auto-rotation
         this.controller.controls().autoRotate = true;
-        this.controller.controls().autoRotateSpeed = 0.06;
+        this.controller.controls().autoRotateSpeed = 0.03;
     }
     static get style() { return "div.infoPanel {\n  width: 300px;\n/*  height: 600px; */\n  right: 0;\n  top: 0;\n  position: absolute;\n  background: rgba(255,255,255,0.8);\n  border: 2px solid #aaa;\n  color: #000;\n  display: none;\n}\n\ndiv.infoPanel dt {\n  font-weight: bolder;\n}"; }
 };
